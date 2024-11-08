@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Symfor - ingredients{% endblock %}
+
+{% block body %}
+
+    <section class="section section-lg bg-default">
+        <div class="container">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success d-flex align-items-center" role="alert">
+                <svg xmlns="http://www.w3.org/2000/svg" width='20' height='20' class="d-none">
+                    <symbol id="check-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                    </symbol>
+                </svg>
+                <svg class="bi flex-shrink-0 me-2" width='30' height='30' role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                <div>
+                    {{ message }}
+                </div>
+            </div>
+        {% endfor %}
+
+
+
+          <h3 class="oh-desktop"><span class="d-inline-block wow slideInUp" style="visibility: visible; animation-name: slideInUp;">Ingredients</span></h3>
+          <div class="row row-lg row-30">
+            {% for item in ingredients %}
+                <div class="col-sm-6 col-lg-4 col-xl-3">
+                    <!-- Product-->
+                    <article class="product wow fadeInLeft" data-wow-delay=".15s" style="visibility: visible; animation-delay: 0.15s; animation-name: fadeInLeft;">
+                        <div class="product-figure"><img src="{{ asset('build/images/product-1-161x162.png') }}" alt="" width="161" height="162">
+                        </div>
+                         <div class="product-rating">
+                            {% for i in 1..item.rating %}
+                                <span class="mdi mdi-star"></span>
+                            {% endfor %}
+
+                            {% if item.rating < 5 %}
+                                {% for i in item.rating+1..5 %}
+                                    <span class="mdi mdi-star text-gray-13"></span>
+                                {% endfor %}
+                            {% endif %}
+                            
+                        </div>
+
+                        <h6 class="product-title">{{item.name}}</h6>
+                        <div class="product-price-wrap">
+                        <div class="product-price">${{item.price}}</div>
+                        </div>
+                        <div class="product-button">
+                        <div class="button-wrap"><a class="button button-xs button-primary button-winona" href="#"><div class="content-original">Add to cart</div><div class="content-dubbed">Add to cart</div></a></div>
+                        <div class="button-wrap"><a class="button button-xs button-secondary button-winona" href="{{ path('app_ingredient_preview', { 'id': item.id }) }}"><div class="content-original">View Product</div><div class="content-dubbed">View Product</div></a></div>
+                        </div>
+                    </article>
+                </div>
+            {% endfor %}
+
+                <div class="navigation m-auto">
+                    {{ knp_pagination_render(ingredients) }}
+                </div>
+          </div>
+        </div>
+      </section>
+{% endblock %}

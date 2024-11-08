@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<section class="section section-sm section-first bg-default">
+        <div class="container">
+
+          <h5 class="heading-5 mb-5">Modifier l'ingredient :  <strong class="text-primary">{{ ingredient.name }}</strong></h5>
+            {{ form_start(form, {'method': 'POST'}) }}
+            <div class="row row-20 gutters-20">
+              <div class="col-md-6 col-lg-4 oh-desktop">
+                <div class="form-wrap wow slideInDown" >
+                  {{ form_widget(form.name) }}
+                  <span class="form-validation">{{ form_errors(form.name) }} </span>
+                  {# {{ form_label(form.name) }} #}
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4 oh-desktop">
+                <div class="form-wrap wow slideInUp">
+                  {{ form_widget(form.price) }}
+                  <span class="form-validation">{{ form_errors(form.price) }} </span>
+                  {# {{ form_label(form.price) }} #}
+                </div>
+              </div>
+                <div class="col-lg-4 oh-desktop">
+                {{ form_widget(form.rating) }}
+                <span class="form-validation">{{ form_errors(form.rating) }} </span>
+                  {# {{ form_label(form.rating) }} #}
+                </div>
+              </div>
+             
+            </div>
+            <div class="group-custom-1 group-middle oh-desktop m-auto">
+                {{ form_widget(form.submit) }}     
+                <span class="form-validation">{{ form_errors(form) }} </span>
+            </div>
+          {{ form_end(form) }}
+        </div>
+      </section>
+{% endblock %}
